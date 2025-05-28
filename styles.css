@@ -47,3 +47,22 @@ body {
 .score-block {
     font-size: 50px;
 }
+
+.reset {
+    background-color: wheat;
+    border: 1px solid rgb(246, 220, 171);
+    outline: none;
+    height: 40px;
+    width: 200px;
+    transition: 0.3s;
+    display: none;
+}
+
+.reset:hover {
+    background-color: rgb(248, 232, 204);
+    cursor: pointer;
+}
+
+.gif {
+    display: none;
+}
