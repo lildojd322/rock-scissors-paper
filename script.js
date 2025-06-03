@@ -7,9 +7,31 @@ const infoWin = document.querySelector('.info')
 const buttonReset = document.querySelector('.reset')
 const gifWin = document.querySelector('.gifWin')
 const gifLose = document.querySelector('.gifLose')
+let allWins = parseFloat(document.querySelector('.allWins').textContent)
+let allLoses = parseFloat(document.querySelector('.allLoses').textContent)
 let playerWin = 0
 let machineWin = 0
 
+const saveStatsToLocalStorage = () => {
+    const stats = []
+    stats.push({ allWins, allLoses })
+    localStorage.setItem('stats', JSON.stringify(stats))
+}
+
+const loadStatsFromLocalStorage = () => {
+    const stats = JSON.parse(localStorage.getItem('stats'))
+    if (stats) {
+        allLoses = stats[0].allLoses
+        allWins = stats[0].allWins
+    }
+    restats()
+}
+
+const restats = () => {
+    document.querySelector('.allWins').textContent = allWins
+    document.querySelector('.allLoses').textContent = allLoses
+    saveStatsToLocalStorage()
+}
 
 const randomElement = () => {
     let randomSelect = selects[Math.floor(Math.random() * selects.length)]
@@ -34,19 +56,23 @@ selects.forEach(e => {
         }
 
         if (machineWin >= 6 && playerWin < machineWin) {
+            allLoses += 1
+            restats()
             infoWin.textContent = 'Победа за компьютером!'
-            gifLose.style.cssText = 'display: block'
             buttonReset.style.display = 'block'
             selects.forEach(e => {
                 e.style.cssText = 'display: none'
             })
+            saveStatsToLocalStorage()
         } else if (playerWin >= 6 && machineWin < playerWin) {
+            allWins += 1
+            restats()
             infoWin.textContent = 'Победа за вами!'
-            gifWin.style.cssText = 'display: block'
             buttonReset.style.display = 'block'
             selects.forEach(e => {
                 e.style.cssText = 'display: none'
             })
+            saveStatsToLocalStorage()
         }
     })
 })
@@ -66,3 +92,5 @@ buttonReset.addEventListener('click', () => {
     machineScore.textContent = machineWin
     infoWin.textContent = 'Выберите предмет'
 })
+
+loadStatsFromLocalStorage()
