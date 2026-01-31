@@ -46,7 +46,7 @@ selects.forEach(e => {
         if (fieldPlayer.textContent === 'rock' && fieldMachine.textContent === 'scissors' || fieldPlayer.textContent === 'paper' && fieldMachine.textContent === 'rock' || fieldPlayer.textContent === 'scissors' && fieldMachine.textContent === 'paper') {
             playerWin += 1
             playerScore.textContent = playerWin
-            infoWin.textContent = 'вы выйграли'
+            infoWin.textContent = 'вы выиграли'
         } else if (fieldPlayer.textContent === 'scissors' && fieldMachine.textContent === 'rock' || fieldPlayer.textContent === 'rock' && fieldMachine.textContent === 'paper' || fieldPlayer.textContent === 'paper' && fieldMachine.textContent === 'scissors') {
             machineWin += 1
             machineScore.textContent = machineWin
